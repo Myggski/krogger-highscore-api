@@ -11,6 +11,7 @@
     "start": "npm run build && npm run serve",
     "serve": "node -r dotenv/config build/index.js",
     "build": "npm run build-ts",
+    "build-ts": "tsc"
   },
   "author": "Tomas Wallin",
   "license": "MIT",

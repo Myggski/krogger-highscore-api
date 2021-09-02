@@ -2,6 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const User_1 = (0, tslib_1.__importDefault)(require("./User"));
+/**
+ * Builder pattern for User
+ */
 class UserBuilder {
     get name() {
         return this._name;

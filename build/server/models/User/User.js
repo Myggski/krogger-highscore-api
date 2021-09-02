@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * User-object for 'end users'
+ */
 class User {
     constructor(builder) {
         this.name = builder.name;

@@ -22,7 +22,7 @@ const ApiSuccess = <T>(type: SuccessType, message: string = 'Success', data?: T)
   send: (res: Response): Response => {
     switch (type) {
       case SuccessType.CREATED:
-        return new SuccessCreatedResponse(message).send(res);
+        return new SuccessCreatedResponse(message, data).send(res);
       case SuccessType.NO_CONTENT:
         return new SuccessNoContentResponse(message).send(res);
       default: {

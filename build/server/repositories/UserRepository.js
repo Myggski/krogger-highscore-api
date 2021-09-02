@@ -9,7 +9,7 @@ class UserRepository {
         this.COLLECTION_NAME = 'users';
     }
     /**
-     * Creating a voice-user or a text-user
+     * Adding highscore to database
      * @param user - User
      */
     create(user) {
@@ -25,8 +25,7 @@ class UserRepository {
         });
     }
     /**
-     * Get all the users in array
-     * Using Object.freeze for performance, and having a chance to use Readonly<T>
+     * Get all highscores to list
      */
     getList() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {

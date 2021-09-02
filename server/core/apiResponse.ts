@@ -86,7 +86,7 @@ export class SuccessResponse<T> extends ApiResponse {
  * Response Code - 201
  */
 export class SuccessCreatedResponse<T> extends ApiResponse {
-  constructor(message: string) {
+  constructor(message: string, public data: T[] | T) {
     super(StatusCode.SUCCESS, ResponseStatus.CREATED, message);
   }
 }
