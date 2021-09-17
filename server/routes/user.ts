@@ -1,7 +1,8 @@
 ﻿import { Router } from 'express';
-import { Success, Created, NoContent } from '../core/apiSuccess';
+import { Success, Created } from '../core/apiSuccess';
 import UserService from '../services/UserService';
 import asyncHandler from '../core/asyncHandler';
+import { decrypt, encrypt } from '../core/encryption';
 
 const router = Router();
 const service = new UserService();
@@ -23,7 +24,8 @@ router.get(
 router.post(
     '/', 
     asyncHandler( async (req: any, res: any) => {
-        const user = await service.create(req.body?.name, req.body?.score);
+        const decryptedData = JSON.parse(decrypt(req.body?.data));
+        const user = await service.create(decryptedData?.name, decryptedData?.score);
         return Created(user).send(res);
     }),
 );

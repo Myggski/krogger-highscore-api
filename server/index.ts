@@ -36,8 +36,8 @@ export class Server {
      * @private
      */
     private handleMiddleware(): void {
-        this.app.use(bodyParser.json({ limit: '10mb' }));
-        this.app.use(bodyParser.urlencoded({ extended: true, limit: '10mb', parameterLimit: 50000 }));
+        this.app.use(bodyParser.urlencoded({ extended: false }))
+        this.app.use(bodyParser.json())
         this.app.use(express.static(path.join(__dirname, '../../app/dist/')));
         this.app.use(cors({ origin: corsUrl, optionsSuccessStatus: 200 }));
     }

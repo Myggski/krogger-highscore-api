@@ -12,11 +12,17 @@ const app = admin.initializeApp({
 const store = app.firestore();
 
 const create = (collectionName: string, object: any) => {
-    return store.collection(collectionName).add(object);  
+    return store
+        .collection(collectionName)
+        .add(object);  
 };
 
 const getList = (collectionName: string) => {
-      return store.collection(collectionName).get();
+      return store
+          .collection(collectionName)
+          .orderBy('score', 'desc')
+          .limit(10)
+          .get();
 };
 
 export default {

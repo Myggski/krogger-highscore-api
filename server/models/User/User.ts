@@ -11,14 +11,6 @@ class User {
     this.name = builder.name;
     this.score = builder.score;
   }
-
-  public get getName(): string {
-    return this.name;
-  }
-
-  public get getScore(): number {
-    return this.score;
-  }
 }
 
 export default User;

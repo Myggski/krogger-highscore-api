@@ -10,7 +10,7 @@ import { BadRequestError } from '../core/apiError';
  */
 class UserService implements Service<User> {
   private readonly _repository: UserRepository;
-  private readonly _nameRegExp = new RegExp('^\\w+$', 'g');
+  private readonly _nameRegExp = new RegExp('^[A-Za-z0-9]{1,12}$', 'g');
 
   constructor() {
     this._repository = new UserRepository();
@@ -37,12 +37,13 @@ class UserService implements Service<User> {
       throw new BadRequestError(`Value ${score} is not a number`);
     }
     
-    if (!name || name.length > 3 || !this._nameRegExp.test(name)) {
-        throw new BadRequestError(`The name need to contain letters and digits (between 1-3 characters).`);    
+    if (!name.match(this._nameRegExp)?.length) {
+      throw new BadRequestError('Invalid name, try again.');
     }
 
-    const user = await this._repository.create(UserService.convertToUserDto(name, score))
-    return UserService.convertToUser(user);
+    const dboUser = UserService.convertToUserDto(name, score);
+    await this._repository.create(dboUser)
+    return UserService.convertToUser(dboUser);
   }
 
   /**

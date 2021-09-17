@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { encrypt } from "./encryption";
 
 // TODO: Update these to proper codes
 enum StatusCode {
@@ -31,7 +32,7 @@ export abstract class ApiResponse {
   ) { }
 
   protected prepare<T extends ApiResponse>(res: Response, response: T): Response {
-    return res.status(this.status).json(ApiResponse.sanitize(response));
+    return res.status(this.status).send(encrypt(JSON.stringify(ApiResponse.sanitize(response))));
   }
 
   public send(res: Response): Response {
@@ -53,7 +54,7 @@ export abstract class ApiResponse {
   }
 
   private static sanitize<T extends ApiResponse>(response: T): T {
-    if (response instanceof SuccessResponse) {
+    if (response instanceof SuccessResponse || response instanceof SuccessCreatedResponse) {
       const clone = Object.assign({}, response);
 
       if (Array.isArray(response.data)) {
